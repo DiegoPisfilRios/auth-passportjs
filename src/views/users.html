@@ -96,7 +96,7 @@
                 <p>Usuario</p>
 
             </div>
-            <div id="dt-users" style="display: none;">
+            <div id="dt-users" style="display: none; flex-direction: column; gap: 2em;">
                 <p>Usuarios</p>
 
             </div>
@@ -147,8 +147,6 @@
 
         function setUsers(data) {
             if (!data) return
-
-            document.querySelector('#msg').remove()
 
             let dtUser = document.querySelector('#dt-users')
             dtUser.setAttribute('style', 'display: inherit;')
