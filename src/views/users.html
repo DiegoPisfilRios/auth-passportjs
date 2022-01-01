@@ -85,6 +85,17 @@
             flex-direction: column;
             gap: .4em;
         }
+
+        #dt-users {
+            flex-direction: column;
+            gap: 2em;
+        }
+
+        #dt-users > div {
+            display: flex;
+            flex-direction: column;
+            gap: .4em;
+        }
     </style>
     <main>
         <section>
@@ -96,7 +107,7 @@
                 <p>Usuario</p>
 
             </div>
-            <div id="dt-users" style="display: none; flex-direction: column; gap: 2em;">
+            <div id="dt-users" style="display: none;">
                 <p>Usuarios</p>
 
             </div>
@@ -149,7 +160,7 @@
             if (!data) return
 
             let dtUser = document.querySelector('#dt-users')
-            dtUser.setAttribute('style', 'display: inherit;')
+            dtUser.setAttribute('style', 'display: flex;')
 
 
             data.map(user => {
