@@ -91,7 +91,7 @@
             gap: 2em;
         }
 
-        #dt-users > div {
+        #dt-users>div {
             display: flex;
             flex-direction: column;
             gap: .4em;
@@ -143,9 +143,7 @@
                 dtUser.appendChild(p)
             })
             document.querySelector('#logout').setAttribute('style', 'inherit')
-        }
 
-        (function getAuth() {
             fetch('/auth/users', {
                 method: 'GET'
             }).then(res => res.json())
@@ -153,8 +151,7 @@
                     console.log(res)
                     setUsers(res.users)
                 })
-        })()
-
+        }
 
         function setUsers(data) {
             if (!data) return
@@ -183,7 +180,7 @@
 
                 dtUser.appendChild(content)
             })
-            
+
             // document.querySelector('#logout').setAttribute('style', 'inherit')
         }
 
