@@ -138,7 +138,10 @@
             fetch('/auth/users', {
                 method: 'GET'
             }).then(res => res.json())
-                .then(res => setUsers(res.users))
+                .then(res => {
+                    console.log(res)
+                    setUsers(res.users)
+                })
         })()
 
 
