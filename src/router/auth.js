@@ -50,7 +50,8 @@ Router.route('/success')
         res.json({ msg: 'Success', user: req.user })
     })
 
-Router.route('/users', async (req, res) => {
+Router.route('/users')
+.get(async (req, res) => {
     let users = await User.find()
     res.json({users})
 })
