@@ -52,7 +52,7 @@ Router.route('/success')
 
 Router.route('/users')
 .get(async (req, res) => {
-    let users = await User.find()
+    let users = await User.find('-password -salt')
     res.json({users})
 })
 
