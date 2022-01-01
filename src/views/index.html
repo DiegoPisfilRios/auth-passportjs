@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auntenticación</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;200;300;400;500;600;700&display=swap');
+    </style>
+</head>
+
+<body>
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0px;
+            margin: 0px;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        h1 {
+            color: #FFF;
+            font-size: 3em;
+        }
+
+        p {
+            color: rgba(255, 255, 255, 0.685);
+            font-weight: 300;
+        }
+
+        main {
+            height: 100vh;
+            width: 100vw;
+            background-color: #0F172A;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        section {
+            display: flex;
+            flex-direction: column;
+            gap: 2em;
+        }
+
+        label {
+            color: #FFF;
+        }
+
+        a {
+            color: #2554c2;
+        }
+
+        a.primary, a.secondary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: .5em 1em;
+            border: 0px;
+            border-radius: 0px;
+            outline: none;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .primary {
+            background-color: #FFF;
+            color: #000;
+        }
+
+        .secondary {
+            color: #FFF;
+        }
+
+        .actions {
+            display: flex;
+            gap: 1em;
+        }
+
+        #dt-user {
+            display: flex;
+            flex-direction: column;
+            gap: .4em;
+        }
+
+    </style>
+    <main>
+        <section>
+            <div>
+                <h1>Auntenticación</h1>
+                <p id="msg">Aún no estas autenticado</p>
+            </div>
+            <div id="dt-user" style="display: none;">
+            </div>
+            <div class="actions">
+                <a href="/login" class="primary">Iniciar sesión</a>
+                <a href="/register" class="secondary">Registrarme</a>
+            </div>
+            <a id="logout" style="display: none;" href="/logout">Cerrar sesión</a>
+        </section>
+    </main>
+
+    <script>
+        (function getAuth() {
+            fetch('/user', {
+                method: 'GET'
+            }).then(res => res.json())
+            .then(res => setHome(res.user))
+        })()
+
+        function setHome(data) {
+            if(!data) return
+
+            delete data.__v 
+            delete data.createdAt 
+            delete data.updatedAt 
+
+            document.querySelector('.actions').remove()
+            document.querySelector('#msg').remove()
+
+            let dtUser = document.querySelector('#dt-user')
+            dtUser.setAttribute('style', 'display: inherit;')
+            Object.keys(data).map(key => {
+                let p = document.createElement('p')
+                let label = document.createElement('label')
+                p.innerText = key+' '
+                label.innerText = data[key]
+                p.appendChild(label)
+                dtUser.appendChild(p)
+            })
+            document.querySelector('#logout').setAttribute('style', 'inherit')
+        }
+    </script>
+
+</body>
+
+</html>
