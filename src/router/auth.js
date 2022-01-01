@@ -1,4 +1,5 @@
 const passport = require('passport')
+const User = require('../model/User')
 const Router = require('express').Router()
 
 require('../auth/passport')
@@ -48,6 +49,11 @@ Router.route('/success')
     .get((req, res) => {
         res.json({ msg: 'Success', user: req.user })
     })
+
+Router.route('/users', async (req, res) => {
+    let users = await User.find()
+    res.json({users})
+})
 
 
 module.exports = Router
