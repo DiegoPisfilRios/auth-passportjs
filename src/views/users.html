@@ -145,18 +145,19 @@
         function setUsers(data) {
             if (!data) return
 
-
             document.querySelector('#msg').remove()
 
             let dtUser = document.querySelector('#dt-users')
             dtUser.setAttribute('style', 'display: inherit;')
 
+
             data.map(user => {
+
+                let content = document.createElement('div')
 
                 delete user.__v
                 delete user.createdAt
                 delete user.updatedAt
-
 
                 Object.keys(user).map(key => {
                     let p = document.createElement('p')
@@ -164,8 +165,10 @@
                     p.innerText = key + ' '
                     label.innerText = data[key]
                     p.appendChild(label)
-                    dtUser.appendChild(p)
+                    content.appendChild(p)
                 })
+
+                dtUser.appendChild(content)
             })
             
             // document.querySelector('#logout').setAttribute('style', 'inherit')
