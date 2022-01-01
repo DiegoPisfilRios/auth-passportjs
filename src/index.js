@@ -35,6 +35,10 @@ app.post('/register', async (req, res) => {
     })
 })
 
+app.get('/users', (req, res) => {
+    res.sendFile(path.join(__dirname + '/views/users.html'));
+})
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname + '/views/index.html'));
 })
