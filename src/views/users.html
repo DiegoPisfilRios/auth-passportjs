@@ -84,14 +84,11 @@
             gap: 1em;
         }
 
-        #dt-user {
-            display: flex;
-            flex-direction: column;
-            gap: .4em;
-        }
-
         #dt-users {
-            display: flex;
+            display: grid;
+            gap: 1em;
+            grid-auto-rows: auto;
+            grid-template-columns: repeat(auto-fill, minmax(min(100%, 12rem), 1fr));
         }
 
         #dt-users>div {
@@ -106,6 +103,7 @@
             h1 {
                 font-size: 2em;
             }
+
             .actions {
                 flex-direction: column;
             }
@@ -142,7 +140,7 @@
             if (!data) return
 
             let dtUser = document.querySelector('#dt-users')
-            dtUser.setAttribute('style', 'display: flex;')
+            dtUser.setAttribute('style', 'display: grid;')
             document.querySelector('#msg').remove()
 
             data.map(user => {
