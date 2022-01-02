@@ -86,7 +86,7 @@
 
         #dt-users {
             display: grid;
-            gap: 1em;
+            gap: 2em;
             grid-auto-rows: auto;
             grid-template-columns: repeat(auto-fill, minmax(min(100%, 12rem), 1fr));
         }
@@ -96,7 +96,7 @@
             flex-direction: column;
             gap: .4em;
             width: 18rem;
-            height: 9rem;
+            height: fit-content;
         }
 
         @media screen and (max-width: 700px) {
@@ -151,7 +151,7 @@
                 delete user.updatedAt
                 if (user.photo) delete user.photo
                 if (!user.provider) delete user.provider
-                if (!user.providerId) delete user.providerId
+                if (user.providerId) delete user.providerId
 
                 Object.keys(user).map(key => {
                     let p = document.createElement('p')
