@@ -52,6 +52,8 @@ Router.route('/success')
 
 Router.route('/users')
 .get(async (req, res) => {
+    if(!req.user) return res.json({})
+
     let users = await User.find().select('-password')
     res.json({users})
 })

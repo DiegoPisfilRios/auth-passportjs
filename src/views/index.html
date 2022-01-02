@@ -85,6 +85,15 @@
             gap: .4em;
         }
 
+        @media screen and (max-width: 700px) {
+            h1 {
+                font-size: 2em;
+            }
+            .actions {
+                flex-direction: column;
+            }
+        }
+
     </style>
     <main>
         <section>
@@ -99,6 +108,7 @@
                 <a href="/register" class="secondary">Registrarme</a>
             </div>
             <a id="logout" style="display: none;" href="/logout">Cerrar sesión</a>
+            <a id="users" style="display: none;" href="/users">Usuarios</a>
         </section>
     </main>
 
@@ -116,7 +126,10 @@
             delete data.__v 
             delete data.createdAt 
             delete data.updatedAt 
-
+            if (data.photo) delete data.photo
+            if (!data.provider) delete data.provider
+            if (!data.providerId) delete data.providerId
+            
             document.querySelector('.actions').remove()
             document.querySelector('#msg').remove()
 
@@ -131,6 +144,7 @@
                 dtUser.appendChild(p)
             })
             document.querySelector('#logout').setAttribute('style', 'inherit')
+            document.querySelector('#users').setAttribute('style', 'inherit')
         }
     </script>
 

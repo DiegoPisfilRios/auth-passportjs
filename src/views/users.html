@@ -32,11 +32,11 @@
 
         main {
             min-height: 100vh;
-            width: 100vw;
             background-color: #0F172A;
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 2em 0;
         }
 
         section {
@@ -87,14 +87,28 @@
         }
 
         #dt-users {
-            flex-direction: column;
-            gap: 2em;
+            display: flex;
         }
 
         #dt-users>div {
             display: flex;
             flex-direction: column;
             gap: .4em;
+            width: 18rem;
+            height: 9rem;
+        }
+
+        @media screen and (max-width: 700px) {
+            h1 {
+                font-size: 2em;
+            }
+            .actions {
+                flex-direction: column;
+            }
+
+            #dt-users {
+                flex-direction: column;
+            }
         }
     </style>
     <main>
@@ -103,47 +117,14 @@
                 <h1>Usuarios</h1>
                 <p id="msg">Aún no estas autenticado</p>
             </div>
-            <div id="dt-user" style="display: none;">
-                <p>Usuario</p>
-
-            </div>
             <div id="dt-users" style="display: none;">
-                <p>Usuarios</p>
-
             </div>
-            <a id="logout" style="display: none;" href="/logout">Cerrar sesión</a>
+            <a href="/">Inicio</a>
         </section>
     </main>
 
     <script>
         (function getAuth() {
-            fetch('/user', {
-                method: 'GET'
-            }).then(res => res.json())
-                .then(res => setHome(res.user))
-        })()
-
-        function setHome(data) {
-            if (!data) return
-
-            delete data.__v
-            delete data.createdAt
-            delete data.updatedAt
-
-            document.querySelector('#msg').remove()
-
-            let dtUser = document.querySelector('#dt-user')
-            dtUser.setAttribute('style', 'display: inherit;')
-            Object.keys(data).map(key => {
-                let p = document.createElement('p')
-                let label = document.createElement('label')
-                p.innerText = key + ' '
-                label.innerText = data[key]
-                p.appendChild(label)
-                dtUser.appendChild(p)
-            })
-            document.querySelector('#logout').setAttribute('style', 'inherit')
-
             fetch('/auth/users', {
                 method: 'GET'
             }).then(res => res.json())
@@ -151,23 +132,24 @@
                     console.log(res)
                     setUsers(res.users)
                 })
-        }
+        })()
 
         function setUsers(data) {
             if (!data) return
 
             let dtUser = document.querySelector('#dt-users')
             dtUser.setAttribute('style', 'display: flex;')
-
+            document.querySelector('#msg').remove()
 
             data.map(user => {
-
                 let content = document.createElement('div')
 
                 delete user.__v
                 delete user.createdAt
                 delete user.updatedAt
-                delete user.photo
+                if (user.photo) delete user.photo
+                if (!user.provider) delete user.provider
+                if (!user.providerId) delete user.providerId
 
                 Object.keys(user).map(key => {
                     let p = document.createElement('p')
@@ -180,8 +162,6 @@
 
                 dtUser.appendChild(content)
             })
-
-            // document.querySelector('#logout').setAttribute('style', 'inherit')
         }
 
 
