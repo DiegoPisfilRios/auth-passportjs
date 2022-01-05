@@ -3,7 +3,8 @@ var cors = require('cors');
 const morgan = require('morgan');
 const passport = require('passport')
 var cookieParser = require('cookie-parser')
-const session = require('express-session')
+var session = require('express-session')
+var MongoStore = require('connect-mongo')(session); 
 const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
 const path = require('path')
@@ -19,7 +20,12 @@ app.use(cookieParser())
 app.use(session({
     secret: 'keysecret',
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    store: new MongoStore({ 
+        url: process.env.MONGODB_URL,
+        ttl: 14 * 24 * 60 * 60,
+        autoRemove: 'native'
+    })
 }))
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(passport.initialize());
