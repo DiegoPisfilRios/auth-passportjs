@@ -4,7 +4,7 @@ const morgan = require('morgan');
 const passport = require('passport')
 var cookieParser = require('cookie-parser')
 var session = require('express-session')
-var MemoryStore = require('connect-mongo')(session); 
+var MongoStore = require('connect-mongo')(session); 
 const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
 const path = require('path')
@@ -20,8 +20,8 @@ app.use(cookieParser())
 app.use(session({
     secret: 'keysecret',
     resave: false,
-    saveUninitialized: false,
-    store: new MemoryStore({ 
+    saveUninitialized: true,
+    store: new MongoStore({ 
         url: process.env.MONGODB_URL,
         ttl: 14 * 24 * 60 * 60,
         autoRemove: 'native'
