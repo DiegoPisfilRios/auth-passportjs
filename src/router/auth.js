@@ -22,8 +22,8 @@ Router.route('/facebook')
 //* Facebook Callback
 Router.route('/facebook/callback')
     .get(passport.authenticate('facebook', {
-        failureRedirect: '/auth/failure',
-        successRedirect: '/auth/success'
+        failureRedirect: '/',
+        successRedirect: '/'
     }))
 
 //* Redirect to Google
