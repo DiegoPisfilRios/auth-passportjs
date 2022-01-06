@@ -101,8 +101,10 @@
                 <h1>Auntenticación</h1>
                 <p id="msg">Aún no estas autenticado</p>
             </div>
-            <div id="dt-user" style="display: none;">
+            <div id="card-user" style="display: none;">
                 <img id="img-user" alt="img-profile">
+                <div id="dt-user">
+                </div>
             </div>
             <div class="actions">
                 <a href="/login" class="primary">Iniciar sesión</a>
@@ -133,9 +135,9 @@
             
             document.querySelector('.actions').remove()
             document.querySelector('#msg').remove()
+            document.querySelector('#card-user').setAttribute('style', 'display: inherit;')
 
             let dtUser = document.querySelector('#dt-user')
-            dtUser.setAttribute('style', 'display: inherit;')
             Object.keys(data).map(key => {
                 let p = document.createElement('p')
                 let label = document.createElement('label')
