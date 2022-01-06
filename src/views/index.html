@@ -53,7 +53,8 @@
             color: #2554c2;
         }
 
-        a.primary, a.secondary {
+        a.primary,
+        a.secondary {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -89,11 +90,20 @@
             h1 {
                 font-size: 2em;
             }
+
             .actions {
                 flex-direction: column;
             }
         }
 
+        /** card */
+        .card-user {
+            display: flex;
+            padding: 1em;
+            border: 1.5px solid #FFFFFF15;
+            border-radius: 1em;
+            gap: 1em;
+        }
     </style>
     <main>
         <section>
@@ -120,29 +130,29 @@
             fetch('/user', {
                 method: 'GET'
             }).then(res => res.json())
-            .then(res => setHome(res.user))
+                .then(res => setHome(res.user))
         })()
 
         function setHome(data) {
-            if(!data) return
+            if (!data) return
 
-            delete data.__v 
-            delete data.createdAt 
-            delete data.updatedAt 
+            delete data.__v
+            delete data.createdAt
+            delete data.updatedAt
             if (data.photo) document.querySelector('#img-user').setAttribute('src', data.photo)
             if (data.photo) delete data.photo
             if (!data.provider) delete data.provider
             if (!data.providerId) delete data.providerId
-            
+
             document.querySelector('.actions').remove()
             document.querySelector('#msg').remove()
-            document.querySelector('#card-user').setAttribute('style', 'display: inherit;')
+            document.querySelector('#card-user').classList.add('card-user')
 
             let dtUser = document.querySelector('#dt-user')
             Object.keys(data).map(key => {
                 let p = document.createElement('p')
                 let label = document.createElement('label')
-                p.innerText = key+' '
+                p.innerText = key + ' '
                 label.innerText = data[key]
                 p.appendChild(label)
                 dtUser.appendChild(p)
