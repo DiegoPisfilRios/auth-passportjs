@@ -102,6 +102,7 @@
                 <p id="msg">Aún no estas autenticado</p>
             </div>
             <div id="dt-user" style="display: none;">
+                <img id="img-user" alt="img-profile">
             </div>
             <div class="actions">
                 <a href="/login" class="primary">Iniciar sesión</a>
@@ -126,7 +127,7 @@
             delete data.__v 
             delete data.createdAt 
             delete data.updatedAt 
-            if (data.photo) delete data.photo
+            if (data.photo) document.querySelector('#img-user').setAttribute('src', data.photo)
             if (!data.provider) delete data.provider
             if (!data.providerId) delete data.providerId
             
