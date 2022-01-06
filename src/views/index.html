@@ -130,6 +130,7 @@
             delete data.createdAt 
             delete data.updatedAt 
             if (data.photo) document.querySelector('#img-user').setAttribute('src', data.photo)
+            if (data.photo) delete data.photo
             if (!data.provider) delete data.provider
             if (!data.providerId) delete data.providerId
             
