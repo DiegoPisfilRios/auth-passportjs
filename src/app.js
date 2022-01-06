@@ -40,6 +40,7 @@ app.use(session(sess))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(express.static(__dirname + '/public'))
 
 // Setting
 app.set('views', path.join(__dirname, 'views'))
