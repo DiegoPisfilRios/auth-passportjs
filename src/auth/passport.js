@@ -1,5 +1,5 @@
 const User = require('../model/User')   // Load User model
-
+const { ComparePassword } = require('./Password')
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const FacebookStrategy = require('passport-facebook').Strategy
@@ -17,7 +17,7 @@ const verifyCallback = async (accessToken, refreshToken, profile, done) => {
             lastname: profile.name.familyName,
             providerId: profile.id,
             provider: profile.provider,
-            photo: profile.photos[0].value,
+            photo: profile.provider==='facebook' ? `https://graph.facebook.com/${profile.id}/picture?width=200&height=200&access_token=${accessToken}`: profile.photos[0].value ,
         }, (err, doc) => {
             if (err) return done(err)
             return done(null, doc)
@@ -31,11 +31,10 @@ const verifyCallback = async (accessToken, refreshToken, profile, done) => {
 //* Local
 passport.use(new LocalStrategy(
     function (username, password, done) {
-        console.log(username, password)
         User.findOne({ email: username }, function (err, user) {
-            // if (err) { return done(err); }
-            // if (!user) { return done(null, false); }
-            // if (user.password !== password) { return done(null, false); }
+            if (err) { return done(err); }
+            if (!user) { return done(null, false); }
+            if (!ComparePassword({ password , comparePassword: user.password })) { return done(null, false); }
             return done(null, user);
         })
     }

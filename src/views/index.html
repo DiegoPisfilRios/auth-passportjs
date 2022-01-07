@@ -6,121 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Auntenticación</title>
+    <link rel="stylesheet" href="css/main.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;200;300;400;500;600;700&display=swap');
     </style>
 </head>
 
 <body>
-    <style>
-        * {
-            box-sizing: border-box;
-            padding: 0px;
-            margin: 0px;
-            font-family: 'Roboto Mono', monospace;
-        }
-
-        h1 {
-            color: #FFF;
-            font-size: 3em;
-        }
-
-        p {
-            color: rgba(255, 255, 255, 0.685);
-            font-weight: 300;
-        }
-
-        main {
-            min-height: 100vh;
-            width: 100vw;
-            background-color: #0F172A;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        section {
-            display: flex;
-            flex-direction: column;
-            gap: 2em;
-        }
-
-        label {
-            color: #FFF;
-        }
-
-        a {
-            color: #2554c2;
-        }
-
-        a.primary,
-        a.secondary {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: .5em 1em;
-            border: 0px;
-            border-radius: 0px;
-            outline: none;
-            cursor: pointer;
-            text-decoration: none;
-        }
-
-        .primary {
-            background-color: #FFF;
-            color: #000;
-        }
-
-        .secondary {
-            color: #FFF;
-        }
-
-        .actions {
-            display: flex;
-            gap: 1em;
-        }
-
-        #dt-user {
-            display: flex;
-            flex-direction: column;
-            gap: .4em;
-        }
-
-        @media screen and (max-width: 700px) {
-            h1 {
-                font-size: 2em;
-            }
-
-            .actions {
-                flex-direction: column;
-            }
-        }
-
-        /** card */
-        .card-user {
-            display: flex !important;
-            padding: 1.5em;
-            border: 2px solid #121e3b;
-            border-radius: 1em;
-            gap: 1.5em;
-            background-color: #0d1425;
-        }
-
-        .card-user img {
-            position: relative;
-            display: block;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            max-height: 8rem;
-            max-width: 8rem;
-        }
-
-        .card-user p,
-        .card-user label {
-            font-size: .93em;
-        }
-    </style>
     <main>
         <section>
             <div>
@@ -136,8 +28,10 @@
                 <a href="/login" class="primary">Iniciar sesión</a>
                 <a href="/register" class="secondary">Registrarme</a>
             </div>
-            <a id="logout" style="display: none;" href="/logout">Cerrar sesión</a>
-            <a id="users" style="display: none;" href="/users">Usuarios</a>
+            <div style="display: flex; flex-direction: column; gap: .5em;">
+                <a id="users" style="display: none;" href="/users">Usuarios</a>
+                <a id="logout" style="display: none;" href="/logout">Cerrar sesión</a>
+            </div>
         </section>
     </main>
 

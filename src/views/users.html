@@ -9,117 +9,24 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;200;300;400;500;600;700&display=swap');
     </style>
+    <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body>
-    <style>
-        * {
-            box-sizing: border-box;
-            padding: 0px;
-            margin: 0px;
-            font-family: 'Roboto Mono', monospace;
-        }
-
-        h1 {
-            color: #FFF;
-            font-size: 3em;
-        }
-
-        p {
-            color: rgba(255, 255, 255, 0.685);
-            font-weight: 300;
-        }
-
-        main {
-            min-height: 100vh;
-            background-color: #0F172A;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2em 0;
-        }
-
-        section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 2em;
-            width: 100%;
-            padding: 0 2rem;
-        }
-
-        label {
-            color: #FFF;
-        }
-
-        a {
-            color: #2554c2;
-        }
-
-        a.primary,
-        a.secondary {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: .5em 1em;
-            border: 0px;
-            border-radius: 0px;
-            outline: none;
-            cursor: pointer;
-            text-decoration: none;
-        }
-
-        .primary {
-            background-color: #FFF;
-            color: #000;
-        }
-
-        .secondary {
-            color: #FFF;
-        }
-
-        .actions {
-            display: flex;
-            gap: 1em;
-        }
-
-        #dt-users {
-            display: grid;
-            gap: 2em;
-            grid-auto-rows: auto;
-            grid-template-columns: repeat(auto-fill, minmax(min(100%, 12rem), 1fr));
-        }
-
-        #dt-users>div {
-            display: flex;
-            flex-direction: column;
-            gap: .4em;
-            width: 18rem;
-            height: fit-content;
-        }
-
-        @media screen and (max-width: 700px) {
-            h1 {
-                font-size: 2em;
-            }
-
-            .actions {
-                flex-direction: column;
-            }
-
-            #dt-users {
-                flex-direction: column;
-            }
-        }
-    </style>
     <main>
-        <section>
+        <section style="min-width: 85%; padding: 2em 0;">
             <div>
                 <h1>Usuarios</h1>
                 <p id="msg">Aún no estas autenticado</p>
             </div>
             <div id="dt-users" style="display: none;">
+
+                <div id="card-user" style="display: none;">
+                    <img id="img-user" alt="img-profile">
+                    <div id="dt-user">
+                    </div>
+                </div>
+
             </div>
             <a href="/">Inicio</a>
         </section>
@@ -139,19 +46,31 @@
         function setUsers(data) {
             if (!data) return
 
-            let dtUser = document.querySelector('#dt-users')
-            dtUser.setAttribute('style', 'display: grid;')
+            let dtUsers = document.querySelector('#dt-users')
+            dtUsers.setAttribute('style', 'display: grid;')
+
             document.querySelector('#msg').remove()
 
             data.map(user => {
-                let content = document.createElement('div')
+                let card = document.createElement('div')
+                card.classList.add('card-user')
 
                 delete user.__v
                 delete user.createdAt
                 delete user.updatedAt
+                if (user.photo) {
+                    let imgProfile = document.createElement('img')
+                    imgProfile.setAttribute('alt', 'profile-photo')
+                    imgProfile.setAttribute('id', 'img-user')
+                    imgProfile.setAttribute('src', user.photo)
+                    card.appendChild(imgProfile)
+                }
                 if (user.photo) delete user.photo
                 if (!user.provider) delete user.provider
                 if (user.providerId) delete user.providerId
+
+                let dtUser = document.createElement('div')
+                dtUser.setAttribute('id', 'dt-user')
 
                 Object.keys(user).map(key => {
                     let p = document.createElement('p')
@@ -159,10 +78,10 @@
                     p.innerText = key + ' '
                     label.innerText = user[key]
                     p.appendChild(label)
-                    content.appendChild(p)
+                    dtUser.appendChild(p)
                 })
-
-                dtUser.appendChild(content)
+                card.appendChild(dtUser)
+                dtUsers.appendChild(card)
             })
         }
 

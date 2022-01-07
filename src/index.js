@@ -2,6 +2,8 @@ const path = require('path');
 const app = require('./app')
 const User = require('./model/User')
 
+const { EncodePassword } = require('./auth/Password')
+
 app.listen(app.get('port'), () => {
     console.log('ON SERVER >>' + app.get('port'))
 })
@@ -28,9 +30,15 @@ app.get('/register', (req, res) => {
 })
 
 app.post('/register', async (req, res) => {
-    User.create(req.body, function (err, user) {
-        if (err) return res.redirect(path.join(__dirname + '/views/register.html'))
-            
+    let user = new User(req.body)
+
+    user.password = EncodePassword(req.body.password)
+    user.photo = user.gravatar()
+
+    await user.save((err, user) => {
+        if (err) return res.redirect(res.redirect(path.join(__dirname + '/views/register.html')))
+
+        req.user = user
         res.redirect('/login')
     })
 })
