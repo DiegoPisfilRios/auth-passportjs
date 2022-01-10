@@ -13,9 +13,9 @@ require('./db').connect();
 app.use('/auth', require('./router/auth'))
 app.use('/user', require('./router/user'))
 
-app.get('/user', (req, res) => {
-    res.send({ user: req.user })
-})
+// app.get('/user', (req, res) => {
+//     res.send({ user: req.user })
+// })
 
 app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname + '/views/login.html'));
