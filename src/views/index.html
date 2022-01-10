@@ -31,7 +31,7 @@
             <div style="display: flex; flex-direction: column; gap: .5em;">
                 <a id="users" style="display: none;" href="/users">Usuarios</a>
                 <a id="logout" style="display: none;" href="/logout">Cerrar sesión</a>
-                <button id="delete" style="display: none;" >Eliminar cuenta</button>
+                <button id="delete" style="display: none;">Eliminar cuenta</button>
             </div>
         </section>
     </main>
@@ -42,8 +42,10 @@
                 method: 'GET'
             }).then(res => res.json())
                 .then(res => {
-                    localStorage.setItem('idAuth', res.user._id)
-                    setHome(res.user)
+                    if (res.user) {
+                        localStorage.setItem('idAuth', res.user._id)
+                        setHome(res.user)
+                    }
                 })
         })()
 
@@ -81,11 +83,11 @@
             fetch(`/user/${localStorage.getItem('idAuth')}`, {
                 method: 'delete'
             }).then(res => res.json())
-            .then(res => {
-                console.log(res)
-                document.location.reload()
-            })
-            .catch(err => console.log(err))
+                .then(res => {
+                    console.log(res)
+                    document.location.reload()
+                })
+                .catch(err => console.log(err))
         })
     </script>
 
