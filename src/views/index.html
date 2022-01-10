@@ -80,7 +80,11 @@
             console.log('ok')
             fetch(`/user/${localStorage.getItem('idAuth')}`, {
                 method: 'delete'
+            }).then(res => res.json())
+            .then(res => {
+                document.location.reload()
             })
+            .catch(err => console.log(err))
         })
     </script>
 
