@@ -33,8 +33,8 @@ Router.route('/google')
 //* Google Callback
 Router.route('/google/callback')
     .get(passport.authenticate('google', {
-        failureRedirect: '/auth/failure',
-        successRedirect: '/auth/success'
+        failureRedirect: '/',
+        successRedirect: '/'
     })
     )
 

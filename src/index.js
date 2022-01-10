@@ -11,6 +11,7 @@ app.listen(app.get('port'), () => {
 require('./db').connect();
 
 app.use('/auth', require('./router/auth'))
+app.use('/user', require('./router/user'))
 
 app.get('/user', (req, res) => {
     res.send({ user: req.user })
@@ -34,6 +35,7 @@ app.post('/register', async (req, res) => {
 
     user.password = EncodePassword(req.body.password)
     user.photo = user.gravatar()
+    user.provider = 'local'
 
     await user.save((err, user) => {
         if (err) return res.redirect(res.redirect(path.join(__dirname + '/views/register.html')))
