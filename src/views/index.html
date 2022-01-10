@@ -31,7 +31,7 @@
             <div style="display: flex; flex-direction: column; gap: .5em;">
                 <a id="users" style="display: none;" href="/users">Usuarios</a>
                 <a id="logout" style="display: none;" href="/logout">Cerrar sesión</a>
-                <button id="delete" style="display: none;">Eliminar cuenta</button>
+                <a id="delete" style="display: none;" href="/user/delete">Eliminar cuenta</a>
             </div>
         </section>
     </main>
@@ -43,7 +43,6 @@
             }).then(res => res.json())
                 .then(res => {
                     if (res.user) {
-                        localStorage.setItem('idAuth', res.user._id)
                         setHome(res.user)
                     }
                 })
@@ -77,18 +76,6 @@
             document.querySelector('#users').setAttribute('style', 'inherit')
             document.querySelector('#delete').setAttribute('style', 'inherit')
         }
-
-        document.querySelector('#delete').addEventListener('click', () => {
-            console.log('ok')
-            fetch(`/user/${localStorage.getItem('idAuth')}`, {
-                method: 'delete'
-            }).then(res => res.json())
-                .then(res => {
-                    console.log(res)
-                    document.location.reload()
-                })
-                .catch(err => console.log(err))
-        })
     </script>
 
 </body>

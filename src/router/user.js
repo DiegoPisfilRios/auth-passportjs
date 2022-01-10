@@ -9,11 +9,10 @@ function auth(req, res, done) {
 router.route('/')
     .get(auth, (req, res) => {
         res.json({ user: req.user })
-    });
-
-router.route('/:id')
-    .delete(auth, async (req, res) => {
-        await User.findOneAndDelete({ _id: req.params.id })
+    })
+router.route('/delete')
+    .get(auth, async (req, res) => {
+        await User.findOneAndDelete({ _id: req.user._id })
         req.session.destroy()
         res.redirect('/')
     })
