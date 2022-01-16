@@ -9,14 +9,16 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;200;300;400;500;600;700&display=swap');
     </style>
+    <script src="https://unpkg.com/feather-icons"></script>
+
     <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body>
     <main>
-        <section style="min-width: 85%; padding: 2em 0;">
+        <section style="min-width: 85%;">
             <div>
-                <h1>Usuarios</h1>
+                <h1><i data-feather="users"></i> Usuarios</h1>
                 <p id="msg">Aún no estas autenticado</p>
             </div>
             <div id="dt-users" style="display: none;">
@@ -28,11 +30,12 @@
                 </div>
 
             </div>
-            <a href="/">Inicio</a>
+            <a class="a-home" href="/"><i data-feather="arrow-left"></i> Inicio</a>
         </section>
     </main>
 
     <script>
+        feather.replace();
         (function getAuth() {
             fetch('/auth/users', {
                 method: 'GET'

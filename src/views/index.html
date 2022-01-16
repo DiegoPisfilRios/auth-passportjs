@@ -10,6 +10,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;200;300;400;500;600;700&display=swap');
     </style>
+    <script src="https://unpkg.com/feather-icons"></script>
 </head>
 
 <body>
@@ -28,15 +29,18 @@
                 <a href="/login" class="primary">Iniciar sesión</a>
                 <a href="/register" class="secondary">Registrarme</a>
             </div>
-            <div style="display: flex; flex-direction: column; gap: .5em;">
-                <a id="users" style="display: none;" href="/users">Usuarios</a>
-                <a id="logout" style="display: none;" href="/logout">Cerrar sesión</a>
-                <a id="delete" style="display: none;" href="/user/delete">Eliminar cuenta</a>
+            <div class="auth-actions">
+                <a id="users" style="display: none;" href="/users"><i data-feather="users"></i> Usuarios</a>
+                <div>
+                    <a id="logout" style="display: none;" href="/logout">Cerrar sesión</a>
+                    <a id="delete" style="display: none;" href="/user/delete">Eliminar cuenta</a>
+                </div>
             </div>
         </section>
     </main>
 
     <script>
+        feather.replace();
         (function getAuth() {
             fetch('/user', {
                 method: 'GET'

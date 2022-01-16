@@ -9,13 +9,14 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;200;300;400;500;600;700&display=swap');
     </style>
+    <script src="https://unpkg.com/feather-icons"></script>
     <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body>
     <main>
         <section>
-            <h1>Login</h1>
+            <h1>Iniciar</h1>
             <form action="/auth/login" method="post">
                 <input type="text" name="username" id="username" placeholder="Email" required spellcheck="false">
                 <input type="password" name="password" id="password" placeholder="Password" required spellcheck="false">
@@ -28,10 +29,13 @@
                 <a class="a-social" href="/auth/google"><img src="google-logo.png" alt="">
                     <p>Iniciar con Google</p>
                 </a>
-                <a href="/">Inicio</a>
+                <a class="a-home" href="/"><i data-feather="arrow-left"></i> Inicio</a>
             </div>
         </section>
     </main>
+    <script>
+        feather.replace();
+    </script>
 </body>
 
 </html>

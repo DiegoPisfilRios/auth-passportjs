@@ -9,23 +9,36 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;200;300;400;500;600;700&display=swap');
     </style>
+    <script src="https://unpkg.com/feather-icons"></script>
+
     <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body>
     <main>
         <section>
-            <h1>Register</h1>
+            <h1>Registrarme</h1>
             <form action="/register" method="post">
                 <input type="text" name="email" id="email" placeholder="Email" required>
-                <input type="text" name="password" id="password" placeholder="Password" required>
+                <input type="password" name="password" id="password" placeholder="Password" required>
                 <input type="text" name="firstname" id="firstname" placeholder="firstname" required>
                 <input type="text" name="lastname" id="lastname" placeholder="lastname" required>
                 <button class="primary" type="submit">Registrar</button>
             </form>
-            <a href="/">Inicio</a>
+            <div class="social-links">
+                <a class="a-social" href="/auth/facebook"><img src="facebook-logo.png" alt="">
+                    <p>Registrate con Facebook</p>
+                </a>
+                <a class="a-social" href="/auth/google"><img src="google-logo.png" alt="">
+                    <p>Registrate con Google</p>
+                </a>
+                <a class="a-home" href="/"><i data-feather="arrow-left"></i> Inicio</a>
+            </div>
         </section>
     </main>
 </body>
 
+<script>
+        feather.replace();
+</script>
 </html>
