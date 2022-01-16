@@ -1,6 +1,5 @@
 const path = require('path');
 const app = require('./app')
-const User = require('./model/User')
 
 app.listen(app.get('port'), () => {
     console.log(`Server on port: ${app.get('port')}.`)
