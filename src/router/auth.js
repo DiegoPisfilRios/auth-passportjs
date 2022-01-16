@@ -6,8 +6,7 @@ require('../auth/passport')
 
 //* Local
 Router.route('/login')
-    .post(
-        passport.authenticate('local', {
+    .post(passport.authenticate('local', {
             failureRedirect: '/login',
             successRedirect: '/'
         })
@@ -28,27 +27,16 @@ Router.route('/facebook/callback')
 
 //* Redirect to Google
 Router.route('/google')
-    .get(passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login', 'email'] }))
+    .get(passport.authenticate('google', { 
+        scope: ['https://www.googleapis.com/auth/plus.login', 'email'] 
+    }))
 
 //* Google Callback
 Router.route('/google/callback')
     .get(passport.authenticate('google', {
         failureRedirect: '/',
         successRedirect: '/'
-    })
-    )
-
-//! Failure
-Router.route('/failure')
-    .get((req, res) => {
-        res.json({ msg: 'Failure' })
-    })
-
-//? Success
-Router.route('/success')
-    .get((req, res) => {
-        res.json({ msg: 'Success', user: req.user })
-    })
+    }))
 
 Router.route('/users')
 .get(async (req, res) => {
